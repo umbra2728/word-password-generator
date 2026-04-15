@@ -50,7 +50,7 @@ test("parsePreferences rejects impossible target length floors", () => {
         appendSymbol: false,
         targetLength: "10",
       }),
-    /Target length must be at least 14 characters for the current settings/,
+    /Target length must be at least 15 characters for the current settings/,
   );
 });
 

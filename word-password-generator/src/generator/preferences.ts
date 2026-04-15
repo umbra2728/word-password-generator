@@ -48,6 +48,7 @@ export function parsePreferences(raw: RawPreferences): GeneratorConfig {
 
     const minimumLength =
       wordCount * minimumProfileLengths[wordLengthProfile] +
+      separator.length * Math.max(wordCount - 1, 0) +
       (raw.appendDigits ? digitCount : 0) +
       (raw.appendSymbol ? 1 : 0);
 
