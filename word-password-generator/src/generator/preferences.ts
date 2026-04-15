@@ -37,7 +37,7 @@ export function parsePreferences(raw: RawPreferences): GeneratorConfig {
   const caseMode = parseCaseMode(raw.caseMode);
   const wordLengthProfile = parseProfile(raw.wordLengthProfile);
   const digitCount = parseDigitCount(raw.digitCount);
-  const targetLength = raw.targetLength.trim() === "" ? null : parsePositiveInt(raw.targetLength, "Target length");
+  const targetLength = generationMode === "targetLength" ? parseTargetLength(raw.targetLength) : null;
   const specialSymbol = parseSpecialSymbol(raw.specialSymbol);
 
   if (generationMode === "targetLength") {
@@ -95,6 +95,15 @@ function parseSpecialSymbol(value: string): string {
   const normalized = value.trim();
   if (allowedSpecialSymbols.has(normalized)) return normalized;
   throw new Error("Special symbol must be one of: !, @, #, $");
+}
+
+function parseTargetLength(value: string): number {
+  const normalized = value.trim();
+  if (normalized === "") {
+    throw new Error("Target length is required in Target Length mode");
+  }
+
+  return parsePositiveInt(normalized, "Target length");
 }
 
 function parseSeparator(value: string): Separator {
