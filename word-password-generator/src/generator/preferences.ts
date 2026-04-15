@@ -95,9 +95,16 @@ function parseProfile(value: string): WordLengthProfile {
 }
 
 function parsePositiveInt(value: string, label: string): number {
-  const parsed = Number.parseInt(value, 10);
-  if (!Number.isInteger(parsed) || parsed <= 0) {
+  const normalized = value.trim();
+
+  if (!/^\d+$/.test(normalized)) {
     throw new Error(`${label} must be a positive integer`);
   }
+
+  const parsed = Number(normalized);
+  if (!Number.isSafeInteger(parsed) || parsed <= 0) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+
   return parsed;
 }

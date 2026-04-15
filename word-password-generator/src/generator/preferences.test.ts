@@ -53,3 +53,33 @@ test("parsePreferences rejects impossible target length floors", () => {
     /Target length must be at least 14 characters for the current settings/,
   );
 });
+
+test("parsePreferences rejects malformed numeric strings", () => {
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        wordCount: "3abc",
+      }),
+    /Word count must be a positive integer/,
+  );
+
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        digitCount: "2abc",
+      }),
+    /Digit count must be a positive integer/,
+  );
+
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        generationMode: "targetLength",
+        targetLength: "16abc",
+      }),
+    /Target length must be a positive integer/,
+  );
+});
