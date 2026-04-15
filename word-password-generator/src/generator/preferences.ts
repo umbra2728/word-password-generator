@@ -17,6 +17,9 @@ export interface RawPreferences {
 }
 
 const maxAttempts = 500;
+const allowedWordCounts = new Set([2, 3, 4, 5]);
+const allowedDigitCounts = new Set([1, 2, 3, 4]);
+const allowedSpecialSymbols = new Set(["!", "@", "#", "$"]);
 const separators = new Set<Separator>(["", "-", "_", "."]);
 const caseModes = new Set<CaseMode>(["lowercase", "uppercase", "capitalized"]);
 const profiles = new Set<WordLengthProfile>(["short", "medium", "long", "mixed"]);
@@ -29,17 +32,13 @@ const minimumProfileLengths: Record<WordLengthProfile, number> = {
 
 export function parsePreferences(raw: RawPreferences): GeneratorConfig {
   const generationMode = parseGenerationMode(raw.generationMode);
-  const wordCount = parsePositiveInt(raw.wordCount, "Word count");
+  const wordCount = parseWordCount(raw.wordCount);
   const separator = parseSeparator(raw.separator);
   const caseMode = parseCaseMode(raw.caseMode);
   const wordLengthProfile = parseProfile(raw.wordLengthProfile);
-  const digitCount = parsePositiveInt(raw.digitCount, "Digit count");
+  const digitCount = parseDigitCount(raw.digitCount);
   const targetLength = raw.targetLength.trim() === "" ? null : parsePositiveInt(raw.targetLength, "Target length");
-  const specialSymbol = raw.specialSymbol.trim();
-
-  if (specialSymbol.length !== 1) {
-    throw new Error("Special symbol must be exactly one character");
-  }
+  const specialSymbol = parseSpecialSymbol(raw.specialSymbol);
 
   if (generationMode === "targetLength") {
     if (targetLength === null) {
@@ -78,6 +77,24 @@ export function parsePreferences(raw: RawPreferences): GeneratorConfig {
 function parseGenerationMode(value: string): GenerationMode {
   if (value === "structure" || value === "targetLength") return value;
   throw new Error(`Unsupported generation mode: ${value}`);
+}
+
+function parseWordCount(value: string): number {
+  const parsed = parsePositiveInt(value, "Word count");
+  if (allowedWordCounts.has(parsed)) return parsed;
+  throw new Error("Word count must be one of: 2, 3, 4, 5");
+}
+
+function parseDigitCount(value: string): number {
+  const parsed = parsePositiveInt(value, "Digit count");
+  if (allowedDigitCounts.has(parsed)) return parsed;
+  throw new Error("Digit count must be one of: 1, 2, 3, 4");
+}
+
+function parseSpecialSymbol(value: string): string {
+  const normalized = value.trim();
+  if (allowedSpecialSymbols.has(normalized)) return normalized;
+  throw new Error("Special symbol must be one of: !, @, #, $");
 }
 
 function parseSeparator(value: string): Separator {

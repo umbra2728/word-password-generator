@@ -83,3 +83,36 @@ test("parsePreferences rejects malformed numeric strings", () => {
     /Target length must be a positive integer/,
   );
 });
+
+test("parsePreferences rejects word counts outside the manifest domain", () => {
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        wordCount: "6",
+      }),
+    /Word count must be one of: 2, 3, 4, 5/,
+  );
+});
+
+test("parsePreferences rejects digit counts outside the manifest domain", () => {
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        digitCount: "5",
+      }),
+    /Digit count must be one of: 1, 2, 3, 4/,
+  );
+});
+
+test("parsePreferences rejects special symbols outside the manifest domain", () => {
+  assert.throws(
+    () =>
+      parsePreferences({
+        ...structurePrefs,
+        specialSymbol: "%",
+      }),
+    /Special symbol must be one of: !, @, #, \$/,
+  );
+});
