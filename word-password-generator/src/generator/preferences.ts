@@ -24,7 +24,7 @@ export interface RawPreferences {
 
 const maxAttempts = 500;
 const allowedWordCounts = new Set([2, 3, 4, 5]);
-const allowedDigitCounts = new Set([1, 2, 3, 4]);
+const allowedDigitCounts = new Set([0, 1, 2, 3, 4]);
 const allowedSpecialSymbols = new Set(["!", "@", "#", "$"]);
 const separators = new Set<Separator>(["", "-", "_", "."]);
 const caseModes = new Set<CaseMode>(["lowercase", "uppercase", "capitalized"]);
@@ -92,9 +92,9 @@ function parseWordCount(value: string): number {
 }
 
 function parseDigitCount(value: string): number {
-  const parsed = parsePositiveInt(value, "Digit count");
+  const parsed = parseNonNegativeInt(value, "Digit count");
   if (allowedDigitCounts.has(parsed)) return parsed;
-  throw new Error("Digit count must be one of: 1, 2, 3, 4");
+  throw new Error("Digit count must be one of: 0, 1, 2, 3, 4");
 }
 
 function parseSpecialSymbol(value: string): string {
@@ -128,6 +128,15 @@ function parseProfile(value: string): WordLengthProfile {
 }
 
 function parsePositiveInt(value: string, label: string): number {
+  const parsed = parseNonNegativeInt(value, label);
+  if (parsed <= 0) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+
+  return parsed;
+}
+
+function parseNonNegativeInt(value: string, label: string): number {
   const normalized = value.trim();
 
   if (!/^\d+$/.test(normalized)) {
@@ -135,7 +144,7 @@ function parsePositiveInt(value: string, label: string): number {
   }
 
   const parsed = Number(normalized);
-  if (!Number.isSafeInteger(parsed) || parsed <= 0) {
+  if (!Number.isSafeInteger(parsed) || parsed < 0) {
     throw new Error(`${label} must be a positive integer`);
   }
 

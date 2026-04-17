@@ -120,6 +120,16 @@ test("parsePreferences rejects word counts outside the manifest domain", () => {
   );
 });
 
+test("parsePreferences accepts zero digit count", () => {
+  assert.equal(
+    parsePreferences({
+      ...structurePrefs,
+      digitCount: "0",
+    }).digitCount,
+    0,
+  );
+});
+
 test("parsePreferences rejects digit counts outside the manifest domain", () => {
   assert.throws(
     () =>
@@ -127,7 +137,7 @@ test("parsePreferences rejects digit counts outside the manifest domain", () => 
         ...structurePrefs,
         digitCount: "5",
       }),
-    /Digit count must be one of: 1, 2, 3, 4/,
+    /Digit count must be one of: 0, 1, 2, 3, 4/,
   );
 });
 
