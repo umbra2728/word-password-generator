@@ -4096,5 +4096,5 @@ export const wordlist = [
   "zombie",
   "zoom",
   "zucchini",
-  "zygote"
+  "zygote",
 ] as const;

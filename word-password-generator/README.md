@@ -1,6 +1,25 @@
 # Word Password Generator
 
-Generates secure and memorable passwords using random words with customizable length and structure.
+Generate a memorable password from random words and copy it to the clipboard immediately.
+
+## Behavior
+
+- Runs as a Raycast `no-view` command
+- Copies the generated password to the clipboard immediately
+- Shows the copied password and its final length in a success toast
+- Stores all generation settings in Raycast preferences
+
+## Settings
+
+- Generation mode: structure or target length
+- Word count
+- Separator
+- Case mode
+- Leet mode
+- Word length profile
+- Optional digits and symbol suffixes
+- Easy-to-type filter
+- Awkward-cluster avoidance
 
 ## Word List
 

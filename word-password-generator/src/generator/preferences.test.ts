@@ -85,25 +85,28 @@ test("parsePreferences rejects malformed numeric strings", () => {
 });
 
 test("parsePreferences ignores malformed target length text in structure mode", () => {
-  assert.deepEqual(parsePreferences({
-    ...structurePrefs,
-    targetLength: "abc",
-  }), {
-    generationMode: "structure",
-    wordCount: 3,
-    separator: "-",
-    caseMode: "capitalized",
-    leetMode: false,
-    wordLengthProfile: "medium",
-    targetLength: null,
-    appendDigits: true,
-    digitCount: 2,
-    appendSymbol: false,
-    specialSymbol: "!",
-    easyToType: true,
-    avoidAwkwardClusters: true,
-    maxAttempts: 500,
-  });
+  assert.deepEqual(
+    parsePreferences({
+      ...structurePrefs,
+      targetLength: "abc",
+    }),
+    {
+      generationMode: "structure",
+      wordCount: 3,
+      separator: "-",
+      caseMode: "capitalized",
+      leetMode: false,
+      wordLengthProfile: "medium",
+      targetLength: null,
+      appendDigits: true,
+      digitCount: 2,
+      appendSymbol: false,
+      specialSymbol: "!",
+      easyToType: true,
+      avoidAwkwardClusters: true,
+      maxAttempts: 500,
+    },
+  );
 });
 
 test("parsePreferences rejects word counts outside the manifest domain", () => {

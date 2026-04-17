@@ -1,4 +1,10 @@
-import { type CaseMode, type GenerationMode, type GeneratorConfig, type Separator, type WordLengthProfile } from "./types";
+import {
+  type CaseMode,
+  type GenerationMode,
+  type GeneratorConfig,
+  type Separator,
+  type WordLengthProfile,
+} from "./types";
 
 export interface RawPreferences {
   generationMode: string;
