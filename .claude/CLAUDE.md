@@ -26,6 +26,7 @@
 
 ## Definition of Done
 - Run lint, test, and build after any behavior change.
-- Update `word-password-generator/README.md` when preferences, repo layout guidance, or command behavior change.
+- Update the repository root `README.md` when GitHub-facing install, repo layout, or usage guidance changes.
+- Update `word-password-generator/README.md` when package-local commands or package behavior changes.
 - Keep the manifest preference domains and `src/generator/preferences.ts` validation rules in sync, including `digitCount` allowing `0` through `4`.
 - Update `.claude/rules/*.md` when commands, testing workflow, or generator constraints change.
