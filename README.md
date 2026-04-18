@@ -71,13 +71,13 @@ Then open Raycast and search for `Generate Password`.
 - **Generation Mode**
   - `Structure`: generate using the configured number of words
   - `Target Length`: keep reselecting words until the final password matches the exact requested length
-- **Word Count**: number of words before optional suffixes
+- **Word Count**: free-form positive integer for the number of words before optional suffixes
 - **Separator**: none, `-`, `_`, or `.`
 - **Case**: lowercase, uppercase, or capitalized
 - **Leet Mode**: deterministic substitutions like `a -> 4` and `o -> 0`
 - **Word Length Profile**: short, medium, long, or mixed
 - **Target Length**: exact final password length used only in target-length mode
-- **Digits / Digit Count**: append random digits to the end, including `0` through `4` digits
+- **Digits / Digit Count**: append random digits to the end, with any non-negative digit count
 - **Symbol / Special Symbol**: append one symbol after digits
 - **Easy to Type**: reject words with harder keyboard patterns
 - **Avoid Awkward Clusters**: reject dense consonant joins when words are concatenated without a separator

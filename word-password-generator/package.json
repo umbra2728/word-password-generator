@@ -37,16 +37,11 @@
         {
           "name": "wordCount",
           "title": "Word Count",
-          "description": "Select how many words to include before optional suffixes.",
-          "type": "dropdown",
+          "description": "Enter how many words to include before optional suffixes.",
+          "type": "textfield",
           "required": false,
           "default": "3",
-          "data": [
-            { "title": "2", "value": "2" },
-            { "title": "3", "value": "3" },
-            { "title": "4", "value": "4" },
-            { "title": "5", "value": "5" }
-          ]
+          "placeholder": "Any positive integer"
         },
         {
           "name": "separator",
@@ -119,17 +114,11 @@
         {
           "name": "digitCount",
           "title": "Digit Count",
-          "description": "Choose how many random digits to append when digits are enabled.",
-          "type": "dropdown",
+          "description": "Enter how many random digits to append when digits are enabled.",
+          "type": "textfield",
           "required": false,
           "default": "2",
-          "data": [
-            { "title": "0", "value": "0" },
-            { "title": "1", "value": "1" },
-            { "title": "2", "value": "2" },
-            { "title": "3", "value": "3" },
-            { "title": "4", "value": "4" }
-          ]
+          "placeholder": "Any non-negative integer"
         },
         {
           "name": "appendSymbol",

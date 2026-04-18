@@ -23,8 +23,6 @@ export interface RawPreferences {
 }
 
 const maxAttempts = 500;
-const allowedWordCounts = new Set([2, 3, 4, 5]);
-const allowedDigitCounts = new Set([0, 1, 2, 3, 4]);
 const allowedSpecialSymbols = new Set(["!", "@", "#", "$"]);
 const separators = new Set<Separator>(["", "-", "_", "."]);
 const caseModes = new Set<CaseMode>(["lowercase", "uppercase", "capitalized"]);
@@ -86,15 +84,11 @@ function parseGenerationMode(value: string): GenerationMode {
 }
 
 function parseWordCount(value: string): number {
-  const parsed = parsePositiveInt(value, "Word count");
-  if (allowedWordCounts.has(parsed)) return parsed;
-  throw new Error("Word count must be one of: 2, 3, 4, 5");
+  return parsePositiveInt(value, "Word count");
 }
 
 function parseDigitCount(value: string): number {
-  const parsed = parseNonNegativeInt(value, "Digit count");
-  if (allowedDigitCounts.has(parsed)) return parsed;
-  throw new Error("Digit count must be one of: 0, 1, 2, 3, 4");
+  return parseNonNegativeInt(value, "Digit count");
 }
 
 function parseSpecialSymbol(value: string): string {

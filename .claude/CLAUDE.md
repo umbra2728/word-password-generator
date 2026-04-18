@@ -28,5 +28,5 @@
 - Run lint, test, and build after any behavior change.
 - Update the repository root `README.md` when GitHub-facing install, repo layout, or usage guidance changes.
 - Update `word-password-generator/README.md` when package-local commands or package behavior changes.
-- Keep the manifest preference domains and `src/generator/preferences.ts` validation rules in sync, including `digitCount` allowing `0` through `4`.
+- Keep the manifest preference field types and `src/generator/preferences.ts` validation rules in sync, including free-form numeric text fields for `wordCount` and `digitCount`.
 - Update `.claude/rules/*.md` when commands, testing workflow, or generator constraints change.

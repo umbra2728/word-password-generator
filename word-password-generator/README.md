@@ -6,6 +6,8 @@ For the GitHub-visible project overview, installation guide, and usage instructi
 
 - [`../README.md`](../README.md)
 
+`Target Length` remains visible in Raycast preferences, but the generator ignores it unless `Generation Mode` is set to `Target Length`.
+
 ## Package-Local Commands
 
 ```bash

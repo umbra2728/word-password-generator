@@ -109,18 +109,17 @@ test("parsePreferences ignores malformed target length text in structure mode", 
   );
 });
 
-test("parsePreferences rejects word counts outside the manifest domain", () => {
-  assert.throws(
-    () =>
-      parsePreferences({
-        ...structurePrefs,
-        wordCount: "6",
-      }),
-    /Word count must be one of: 2, 3, 4, 5/,
+test("parsePreferences accepts any positive word count", () => {
+  assert.equal(
+    parsePreferences({
+      ...structurePrefs,
+      wordCount: "7",
+    }).wordCount,
+    7,
   );
 });
 
-test("parsePreferences accepts zero digit count", () => {
+test("parsePreferences accepts non-negative digit counts", () => {
   assert.equal(
     parsePreferences({
       ...structurePrefs,
@@ -128,16 +127,13 @@ test("parsePreferences accepts zero digit count", () => {
     }).digitCount,
     0,
   );
-});
 
-test("parsePreferences rejects digit counts outside the manifest domain", () => {
-  assert.throws(
-    () =>
-      parsePreferences({
-        ...structurePrefs,
-        digitCount: "5",
-      }),
-    /Digit count must be one of: 0, 1, 2, 3, 4/,
+  assert.equal(
+    parsePreferences({
+      ...structurePrefs,
+      digitCount: "12",
+    }).digitCount,
+    12,
   );
 });
 
